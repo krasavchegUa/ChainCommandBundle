@@ -164,7 +164,7 @@ class Runner
 
         $command->run($input, $buffer);
 
-        $this->output->write($buffer->get());
+        $this->output->write($buffer->getText());
 
         return $buffer;
     }
