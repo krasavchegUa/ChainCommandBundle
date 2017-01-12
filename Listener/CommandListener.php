@@ -82,11 +82,9 @@ class CommandListener implements EventSubscriberInterface
      */
     public function start(ChainCommandEvent $event)
     {
-        $text = sprintf('%s is a master command of a command chain that has registered member commands',
+        $this->log(sprintf('%s is a master command of a command chain that has registered member commands',
             $event->getCommand()->getName()
-        );
-
-        $this->log($text);
+        ));
     }
 
     /** Log names of children commands
@@ -95,12 +93,10 @@ class CommandListener implements EventSubscriberInterface
      */
     public function childRegistered(ChainCommandEvent $event)
     {
-        $text = sprintf('%s registered as a member of %s command chain',
+        $this->log(sprintf('%s registered as a member of %s command chain',
             $event->getChild()->getName(),
             $event->getCommand()->getName()
-        );
-
-        $this->log($text);
+        ));
     }
 
     /** Log before main command execution
@@ -109,11 +105,9 @@ class CommandListener implements EventSubscriberInterface
      */
     public function beforeMain(ChainCommandEvent $event)
     {
-        $text = sprintf('Executing %s command itself first:',
+        $this->log(sprintf('Executing %s command itself first:',
             $event->getCommand()->getName()
-        );
-
-        $this->log($text);
+        ));
     }
 
     /** Main command executed. Log command output
@@ -131,11 +125,9 @@ class CommandListener implements EventSubscriberInterface
      */
     public function beforeChildChain(ChainCommandEvent $event)
     {
-        $text = sprintf('Executing %s chain members:',
+        $this->log(sprintf('Executing %s chain members:',
             $event->getCommand()->getName()
-        );
-
-        $this->log($text);
+        ));
     }
 
     /** Child/slave command executed. Log command output
@@ -153,11 +145,9 @@ class CommandListener implements EventSubscriberInterface
      */
     public function finished(ChainCommandEvent $event)
     {
-        $text = sprintf('Execution of %s chain completed.',
+        $this->log(sprintf('Execution of %s chain completed.',
             $event->getCommand()->getName()
-        );
-
-        $this->log($text);
+        ));
     }
 
     /** Save log to file
@@ -168,5 +158,4 @@ class CommandListener implements EventSubscriberInterface
     {
         $this->logger->info($text);
     }
-
 }
