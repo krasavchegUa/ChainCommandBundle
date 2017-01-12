@@ -11,7 +11,6 @@
         }
     ],
     "require": {
-        "symfony/symfony": "2.7.x-dev",
         "krasavcheg.ua/bar-bundle": "dev-master",
         "krasavcheg.ua/foo-bundle": "dev-master"
 
