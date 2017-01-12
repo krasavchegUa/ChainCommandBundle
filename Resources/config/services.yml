@@ -1,0 +1,30 @@
+services:
+    chain_command_bundle.collection:
+        class: krasavchegUa\ChainCommandBundle\Service\Collection
+
+    chain_command_bundle.runner:
+        class: krasavchegUa\ChainCommandBundle\Service\Runner
+        arguments: ['@chain_command_bundle.collection', '@event_dispatcher']
+
+    chain_command_bundle.subscriber.command_listener:
+        class: krasavchegUa\ChainCommandBundle\Listener\CommandListener
+        arguments: ['@chain_command_bundle.logger', '@chain_command_bundle.runner']
+        tags:
+            - { name: kernel.event_subscriber }
+
+    chain_command_bundle.logger:
+        class: Symfony\Bridge\Monolog\Logger
+        arguments: ['command_chain_bundle']
+        calls:
+            - ['pushHandler', ['@chain_command_bundle.handler']]
+
+    chain_command_bundle.handler:
+        class:  Monolog\Handler\StreamHandler
+        arguments:
+            - "@=service('kernel').locateResource('@ChainCommandBundle/Resources/logs/chain_command_bundle.log')"
+        calls:
+            - ['setFormatter', ['@chain_command_bundle.format']]
+
+    chain_command_bundle.format:
+        class: Monolog\Formatter\LineFormatter
+        arguments: ["[%%datetime%%]  %%message%%\n"]

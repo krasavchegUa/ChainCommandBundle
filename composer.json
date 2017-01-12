@@ -1,0 +1,24 @@
+{
+    "name": "krasavcheg.ua/chain-command-bundle",
+    "description": "Symfony bundle - implements command chaining functionality.",
+    "type": "symfony-bundle",
+    "homepage": "https://github.com/krasavchegUa/ChainCommandBundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Volodymyr Rudak",
+            "email": "krasavcheg.ua@gmail.com"
+        }
+    ],
+    "require": {
+        "symfony/symfony": "2.7.x-dev",
+        "krasavcheg.ua/bar-bundle": "dev-master",
+        "krasavcheg.ua/foo-bundle": "dev-master"
+
+    },
+    "autoload": {
+        "psr-4": {
+            "krasavchegUa\\ChainCommandBundle\\": ""
+        }
+    }
+}
