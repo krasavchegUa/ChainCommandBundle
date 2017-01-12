@@ -161,9 +161,7 @@ class Runner
     private function runCommand(Command $command, $input)
     {
         $buffer = $this->getBuffer();
-
         $command->run($input, $buffer);
-
         $this->output->write($buffer->getText());
 
         return $buffer;
