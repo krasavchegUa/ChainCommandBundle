@@ -42,6 +42,12 @@ class AppKernel extends Kernel
 }
 ```
 
+###Step 3: Run command
+
+```
+php bin/console foo:hello
+```
+
 Usage?
 -------------------------
 
