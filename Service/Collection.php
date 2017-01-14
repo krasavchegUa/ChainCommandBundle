@@ -25,6 +25,11 @@ class Collection
      */
     private $commands = [];
 
+    public function getCommands()
+    {
+        return $this->commands;
+    }
+
     /** Validate and push command to chain
      *
      * @param Command $command
@@ -81,7 +86,7 @@ class Collection
      * @param $name
      * @return bool|int|string
      */
-    public function getMainChainName($name)
+    public function getMainName($name)
     {
         foreach ($this->commands as $main => $children) {
             foreach ($children as $child) {

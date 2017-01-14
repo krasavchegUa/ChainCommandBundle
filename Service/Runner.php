@@ -15,7 +15,7 @@ use krasavchegUa\ChainCommandBundle\Event\EventList;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Event\ConsoleCommandEvent;
 use Symfony\Component\Console\Input\ArrayInput;
-use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
@@ -41,7 +41,8 @@ class Runner
      */
     private $input;
 
-    /**
+    /** Console output
+     *
      * @var
      */
     private $output;
@@ -82,7 +83,7 @@ class Runner
                 sprintf(
                     'Error: %s command is a member of %s command chain and cannot be executed on its own.',
                     $name,
-                    $this->collection->getMainChainName($name)
+                    $this->collection->getMainName($name)
                 )
             );
         }
@@ -156,24 +157,18 @@ class Runner
      *
      * @param Command $command
      * @param $input
-     * @return Buffer
+     * @return BufferedOutput
      */
     private function runCommand(Command $command, $input)
     {
-        $buffer = $this->getBuffer();
+        $buffer = new BufferedOutput();
         $command->run($input, $buffer);
-        $this->output->write($buffer->getText());
+
+        $output = $buffer->fetch();
+        $buffer->write($output);
+        $this->output->write($output);
 
         return $buffer;
-    }
-
-    /** Used to get Output from console
-     *
-     * @return Buffer
-     */
-    private function getBuffer()
-    {
-        return new Buffer();
     }
 
     /**

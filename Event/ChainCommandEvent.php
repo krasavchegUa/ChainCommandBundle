@@ -28,24 +28,24 @@ class ChainCommandEvent extends ConsoleCommandEvent
 
     /**
      * ChainCommandEvent constructor.
-     * @param Command $mainCommand
+     * @param Command $main
      * @param InputInterface $input
      * @param OutputInterface $output
      * @param Command|null $child
      */
 
     public function __construct(
-        Command $mainCommand,
+        Command $main,
         InputInterface $input,
         OutputInterface $output,
         Command $child = null
     ) {
-        parent::__construct($mainCommand, $input, $output);
+        parent::__construct($main, $input, $output);
 
         $this->child = $child;
     }
 
-    /** Return child/slave command name
+    /** Return child/slave command
      *
      * @return null|Command
      */

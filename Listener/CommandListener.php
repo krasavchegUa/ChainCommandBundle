@@ -116,7 +116,7 @@ class CommandListener implements EventSubscriberInterface
      */
     public function afterMain(ChainCommandEvent $event)
     {
-        $this->log($event->getOutput()->getText());
+        $this->log($event->getOutput()->fetch());
     }
 
     /** Prepare to run chain members
@@ -136,7 +136,7 @@ class CommandListener implements EventSubscriberInterface
      */
     public function afterChild(ChainCommandEvent $event)
     {
-        $this->log($event->getOutput()->getText());
+        $this->log($event->getOutput()->fetch());
     }
 
     /** Chain execution has ended.

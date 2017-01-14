@@ -21,7 +21,7 @@ services:
     chain_command_bundle.handler:
         class:  Monolog\Handler\StreamHandler
         arguments:
-            - "@=service('kernel').locateResource('@ChainCommandBundle/Resources/logs/chain_command_bundle.log')"
+            - "%kernel.logs_dir%/chain_command_bundle/trace.log"
         calls:
             - ['setFormatter', ['@chain_command_bundle.format']]
 
